@@ -11,33 +11,37 @@ import { auth } from "../config/firebase";
 const NavigationStack = (props) => {
   const Stack = createStackNavigator();
 
-  const {auths} = useAuth()
-
+  const { auths } = useAuth();
 
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{ headerShown: false, animationEnabled: true }}
-      />
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ headerShown: false, animationEnabled: true }}
-      />
-      <Stack.Screen
-        name="Register"
-        component={SignUpScreen}
-        options={{
-          title: "",
-          headerShown: true,
-          animationEnabled: true,
-          headerStyle: {
-            backgroundColor: "#f2f2f2",
-          },
-        }}
-      />
+      {auths ? (
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ headerShown: false, animationEnabled: true }}
+        />
+      ) : (
+        <>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false, animationEnabled: true }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={SignUpScreen}
+            options={{
+              title: "",
+              headerShown: true,
+              animationEnabled: true,
+              headerStyle: {
+                backgroundColor: "#f2f2f2",
+              },
+            }}
+          />
+        </>
+      )}
     </Stack.Navigator>
   );
 };
