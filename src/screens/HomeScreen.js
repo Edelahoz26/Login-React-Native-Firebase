@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, SafeAreaView, TextInput } from "react-native";
+import { View, Text, Button, TextInput } from "react-native";
 
 export default function HomeScreen(props) {
   const { navigation } = props;
@@ -9,11 +9,11 @@ export default function HomeScreen(props) {
   };
 
   return (
-    <SafeAreaView>
+    <View>
       <TextInput placeHolder="Usuario"/>
       <Button onPress={goToSettings} title="Ir a Ajustes">
         Cerrar sesion
       </Button>
-    </SafeAreaView>
+    </View>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState, createContext } from "react";
 
 export const AuthContext = createContext({
-  auths: undefined,
+  isLoggedIn: undefined,
   login: () => {},
   logout: () => {},
   register: () => {},
@@ -9,7 +9,7 @@ export const AuthContext = createContext({
 
 export function AuthProvider(props) {
   const { children } = props;
-  const [auths, setAuth] = useState(undefined);
+  const [isLoggedIn, setAuth] = useState(undefined);
   const [registerUser, setRegisterUser] = useState([]);
 
   const login = (userData) => {
@@ -23,7 +23,7 @@ export function AuthProvider(props) {
     setRegisterUser(userData);
   };
   const valueContext = {
-    auths,
+    isLoggedIn,
     registerUser,
     login,
     logout,

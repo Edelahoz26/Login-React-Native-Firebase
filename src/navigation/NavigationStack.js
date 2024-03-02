@@ -6,16 +6,15 @@ import HomeScreen from "../screens/HomeScreen";
 import SignUpScreen from "../components/Auth/SignUpForm";
 import { createStackNavigator } from "@react-navigation/stack";
 import useAuth from "../hooks/useAuth";
-import { auth } from "../config/firebase";
 
 const NavigationStack = (props) => {
   const Stack = createStackNavigator();
 
-  const { auths } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   return (
     <Stack.Navigator>
-      {auths ? (
+      {isLoggedIn ? (
         <Stack.Screen
           name="Home"
           component={HomeScreen}

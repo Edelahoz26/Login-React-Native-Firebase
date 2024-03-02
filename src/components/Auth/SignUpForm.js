@@ -99,7 +99,6 @@ const SignUpForm = (props) => {
       length: text.length >= 8,
     });
   };
-  console.log(requierements);
   return (
     <View style={styles.containerSignUp}>
       <Image
@@ -111,6 +110,7 @@ const SignUpForm = (props) => {
         placeholder="Email"
         name="email"
         value={formData.email}
+        autoCapitalize="none"
         onChangeText={(text) => handleFormChange("email", text)}
         style={styles.inputLogin}
       />
@@ -118,6 +118,7 @@ const SignUpForm = (props) => {
         placeholder="Contraseña"
         name="password"
         value={formData.password}
+        autoCapitalize="none"
         onChangeText={(text) => requierementsText(text)}
         style={styles.inputLogin}
         secureTextEntry

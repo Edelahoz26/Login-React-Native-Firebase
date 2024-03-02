@@ -10,10 +10,12 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-//Uso de useContext
 
 // Función signInWithEmailAndPassword y auth desde el módulo de Firebase
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+
+} from "firebase/auth";
 import { auth } from "../../config/firebase";
 
 //importando el hooks de useContext para contener la autenticación
@@ -25,20 +27,20 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-    const {auths, login} = useAuth();
-    console.log(auths);
+  const { auths, login } = useAuth();
+  console.log(auths);
 
   // Función para manejar el inicio de sesión del usuario con correo electrónico y contraseña
   const loginUserWithEmailAndPassword = async () => {
-
     try {
       // Intentar iniciar sesión con el correo electrónico y la contraseña proporcionados
-      await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        let user = userCredential.user;
-        login(user)
-      });
-      
+      await signInWithEmailAndPassword(auth, email, password).then(
+        (userCredential) => {
+          let user = userCredential.user;
+          login(user);
+        }
+      );
+
       //Campos vacios
       setEmail("");
       setPassword("");
@@ -93,11 +95,13 @@ const LoginForm = (props) => {
         placeholder="Email"
         value={email}
         onChangeText={(text) => setEmail(text)}
+        autoCapitalize="none"
         style={styles.inputLogin}
       />
       <TextInput
         placeholder="Contraseña"
         value={password}
+        autoCapitalize="none"
         onChangeText={(text) => setPassword(text)}
         style={styles.inputLogin}
         secureTextEntry
@@ -114,6 +118,15 @@ const LoginForm = (props) => {
         style={[styles.button, styles.buttonOutline]}
       >
         <Text style={styles.buttonOutlineText}>Register</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        // onPress={loginUserWithEmailAndPasswordGoogle}
+        style={styles.containerLogoLoginGoogle}
+      >
+        <Image
+          source={require("../../../assets/google.png")}
+          style={styles.logoLoginGoogle}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -187,5 +200,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
     maxWidth: 300,
     marginHorizontal: 20,
+  },
+  containerLogoLoginGoogle: {
+    flexDirection: "row",
+    gap: 7,
+    top: 30,
+    alignItems: "center",
+  },
+  logoLoginGoogle: {
+    width: 50,
+    height: 50,
   },
 });
